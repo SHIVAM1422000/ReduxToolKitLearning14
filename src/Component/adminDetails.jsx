@@ -1,38 +1,39 @@
 import { fakeUserData } from "../api/userData";
 import styled from "styled-components";
 import {useDispatch} from "react-redux"
-import { addUser, deleteAllUser } from "../store/slices/userSlice";
+
 import DisplayUser from "./DisplayUser";
-import AdminDetails from "./adminDetails";
+import DisplayAdmin from "./DisplayAdmin";
+import { addAdmin, deleteAllAdmin } from "../store/slices/adminSlice";
 
 
-const UserDetails = () => {
+const AdminDetails = () => {
   
   const dispatch = useDispatch();
 
   const addNewUser = async() => {
     const newUser = await fakeUserData();
-    dispatch(addUser(newUser));
+    dispatch(addAdmin(newUser));
   }
 
-  const deleteAllUserHandler = () => {
+  const deleteAllUserAdminHandler = () => {
     const req = prompt("Sure To Remove All users",'ok');
     console.log("from prompte" , req);
-    if(req) dispatch(deleteAllUser(""));
+    if(req) dispatch(deleteAllAdmin(""));
   }
 
   return (
     <Wrapper>
       <div className="content">
         <div className="admin-table">
-          <div className="admin-subtitle">List of User Details</div>
-          <button className="btn add-btn" onClick={addNewUser} style={{cursor:"pointer"}}>Add New Users</button>
+          <div className="admin-subtitle">List of Admin Details</div>
+          <button className="btn add-btn" onClick={addNewUser} style={{cursor:"pointer"}}>Add New Admin</button>
         </div>
         <ul>
-         <DisplayUser/>
+         <DisplayAdmin/>
         </ul>
         <hr />
-         <button style={{color:"white",backgroundColor:"black", borderRadius:"3px",height:"6vh",width:"10vw"}} onClick={deleteAllUserHandler}>DeleteAllUser</button>;
+         <button style={{color:"white",backgroundColor:"black", borderRadius:"3px",height:"6vh",width:"10vw"}} onClick={deleteAllUserAdminHandler}>DeleteAllAdmin</button>;
       </div>
     </Wrapper>
   );
@@ -80,4 +81,4 @@ const Wrapper = styled.section`
   }
 `;
 
-export default UserDetails;
+export default AdminDetails;
